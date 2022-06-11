@@ -6,6 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="./styles/styles.css" />
+  <!-- PRESS START 2P FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <audio src="./sound/hit.mp3" id="hitSoundEff"></audio>
+  <audio src="./sound/jump.mp3" id="jumpSoundEff"></audio>
+  <audio src="./sound/reach.m4a" id="reachSoundEff"></audio>
   <title>Chrome T-Rex</title>
 </head>
 
@@ -15,7 +22,11 @@
   </style>
 
   <canvas id="myCanvas"></canvas>
+  <div id="restartButton" class="hidden">
+    <img src="./img/restart.png" alt="Restart button" class="noDrag">
+  </div>
 
+  <script src="./cloud.js"></script>
   <script src="./bullets.js"></script>
   <script src="./obstacles.js"></script>
   <script src="./player.js"></script>

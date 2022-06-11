@@ -1,28 +1,32 @@
 class Player {
-  constructor(ctx, gameW, gameH, keys) {
+  constructor(ctx, gameW, gameH, keys, gameRun) {
     this.ctx = ctx;
 
     this.gameWidth = gameW;
     this.gameHeight = gameH;
 
-    this.width = 100;
-    this.height = 100;
+    this.width = 120;
+    this.height = 140;
 
     this.image = new Image();
     this.image.src = "./img/trex/dinowalk.png";
     this.image.frames = 2;
     this.image.framesIndex = 0;
 
+    //Sounds
+    this.jumpSound = document.getElementById("jumpSoundEff");
+
+    //know if game is running or not
+    this.gameRunning = gameRun;
+
     this.posX = 50;
-    this.posY = this.gameHeight / 2;
+    this.posY = this.gameHeight / 2 - 50;
     this.posY0 = this.posY;
 
     this.velY = 1;
-    this.gravity = 0.3;
+    this.gravity = 0.4;
 
     this.keys = keys;
-
-    this.bullets = [];
 
     this.setListeners();
   }
@@ -43,9 +47,6 @@ class Player {
     this.animate(framesCounter);
 
     this.move();
-
-    this.bullets.forEach((bullet) => bullet.draw());
-    this.clearBullets();
   }
 
   animate(framesCounter) {
@@ -59,7 +60,7 @@ class Player {
 
   move() {
     if (this.posY < this.posY0) {
-      // Está saltando!
+      // Saltando
       this.posY += this.velY;
       this.velY += this.gravity;
     } else {
@@ -76,32 +77,19 @@ class Player {
             this.jump();
           }
           break;
-        // case this.keys.SPACE:
-        //   this.shoot();
-        //   break;
       }
     });
   }
 
   jump() {
-    this.posY -= 40;
+    this.posY -= 80;
     this.velY -= 8;
-  }
-
-  shoot() {
-    this.bullets.push(
-      new Bullets(
-        this.ctx,
-        this.posX,
-        this.posY,
-        this.posY0,
-        this.width,
-        this.height
-      )
-    );
-  }
-
-  clearBullets() {
-    this.bullets = this.bullets.filter((bull) => bull.posX <= this.gameWidth);
+    //we need to work here with the sound bug after game false
+    if (this.gameRunning === true) {
+      this.jumpSound.play();
+    } else if (this.gameRunning === false) {
+      this.jumpSound.volume = 0;
+      this.jumpSound.stop();
+    }
   }
 }

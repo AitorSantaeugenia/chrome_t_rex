@@ -8,12 +8,13 @@ class Background {
     this.image.src = "./img/dino_t_rex_chrome_map.png ";
 
     this.posX = 0;
-    this.posY = 0;
+    this.posY = window.innerHeight / 2 + 50;
 
-    this.velX = 1;
+    this.velX = 10;
   }
 
   draw() {
+    //console.log(this.height);
     this.ctx.drawImage(
       this.image,
       this.posX,
