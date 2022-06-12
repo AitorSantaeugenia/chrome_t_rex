@@ -1,6 +1,6 @@
 # Chrome T-Rex
 - My implementation of the no internet game. Done with canvas / vanilla js.
-- You can acces the real one typing chrome://dino in chrome as a URL
+- You can acces the real one typing <b>chrome://dino</b> in chrome as a URL
 
 ## TODO
 - Crouch dino
