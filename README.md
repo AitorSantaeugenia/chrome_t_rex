@@ -6,12 +6,15 @@
 - Crouch dino
 - Solve some minor bugs
 
+<div align="center">
+
 ```
-If you have any suggesitons, plz don't be shy and hit me here on github |or| aitorsantaeugenia@gmail.com
+Any suggesitons, hit me here on github |or| aitorsantaeugenia@gmail.com
 ```
 
-<div align="center">
+
 ```
 BY-NC-SA
 ```
+
 </div>
