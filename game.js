@@ -10,6 +10,7 @@ const Game = {
   obstacles: [],
   clouds: [],
 
+  //spacekey
   keys: {
     SPACE: 32,
   },
@@ -17,8 +18,10 @@ const Game = {
   //score
   score: 0,
 
+  //sounds
   hitSound: document.getElementById("hitSoundEff"),
   reachSoundEff: document.getElementById("reachSoundEff"),
+  //restarting button
   restartButton: document.getElementById("restartButton"),
   gameRunning: true,
 
