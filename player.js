@@ -1,5 +1,5 @@
 class Player {
-  constructor(ctx, gameW, gameH, keys, gameRun) {
+  constructor(ctx, gameW, gameH, keys) {
     this.ctx = ctx;
 
     this.gameWidth = gameW;
@@ -17,7 +17,7 @@ class Player {
     this.jumpSound = document.getElementById("jumpSoundEff");
 
     //know if game is running or not
-    this.gameRunning = gameRun;
+    this.gameRunning = true;
 
     this.posX = 50;
     this.posY = this.gameHeight / 2 - 50;
@@ -25,6 +25,14 @@ class Player {
 
     this.velY = 1;
     this.gravity = 0.4;
+
+    //changing position of TREX to Crouch or Running
+    this.sx = this.image.width / this.image.frames;
+    this.sy = 0;
+    this.offSetRight = 33;
+    this.offSetUp = 0;
+
+    //checking for colision and ending game
 
     this.keys = keys;
 
@@ -34,15 +42,18 @@ class Player {
   draw(framesCounter) {
     this.ctx.drawImage(
       this.image,
-      this.image.framesIndex * (this.image.width / this.image.frames) - 33,
-      0,
+      this.image.framesIndex * this.sx - this.offSetRight,
+      this.sy,
       this.image.width / this.image.frames,
       this.image.height / 2 + 10,
       this.posX,
-      this.posY,
+      this.posY + this.offSetUp,
       this.width,
       this.height
     );
+
+    //check colision border of the player
+    //this.ctx.strokeRect(this.posX, this.posY, this.width, this.height);
 
     this.animate(framesCounter);
 
@@ -59,6 +70,7 @@ class Player {
   }
 
   move() {
+    // console.log(this.gameRunning);
     if (this.posY < this.posY0) {
       // Saltando
       this.posY += this.velY;
@@ -77,6 +89,16 @@ class Player {
             this.jump();
           }
           break;
+
+        case this.keys.ArrowDown:
+          this.crouch();
+
+          break;
+
+        case this.keys.ArrowUp:
+          this.defaultRun();
+
+          break;
       }
     });
   }
@@ -91,5 +113,20 @@ class Player {
       this.jumpSound.volume = 0;
       this.jumpSound.stop();
     }
+  }
+
+  crouch() {
+    this.sx = this.image.width / this.image.frames + 5;
+    this.sy = this.image.height / 2 + 20;
+    this.offSetUp = 50;
+    this.velY += 8;
+    this.offSetRight = 0;
+  }
+
+  defaultRun() {
+    this.sx = this.image.width / this.image.frames;
+    this.sy = 0;
+    this.offSetRight = 33;
+    this.offSetUp = 0;
   }
 }
