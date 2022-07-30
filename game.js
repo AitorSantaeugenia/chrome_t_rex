@@ -13,6 +13,8 @@ const Game = {
   //spacekey
   keys: {
     SPACE: 32,
+    ArrowDown: 40,
+    ArrowUp: 38,
   },
 
   //score
@@ -47,7 +49,7 @@ const Game = {
   refreshScreen() {
     this.interval = requestAnimationFrame(() => this.refreshScreen());
 
-    //console.log(this.gameRunning);
+    this.isCollision() ? (this.gameRunning = false) : (this.gameRunning = true);
     this.isCollision() ? this.gameOver() : null;
 
     if (this.gameRunning) {
@@ -68,13 +70,7 @@ const Game = {
 
   reset() {
     this.background = new Background(this.ctx, this.width, 40); //2527
-    this.player = new Player(
-      this.ctx,
-      this.width,
-      this.height,
-      this.keys,
-      this.gameRunning
-    );
+    this.player = new Player(this.ctx, this.width, this.height, this.keys);
     this.obstacles = [];
   },
 
@@ -106,7 +102,9 @@ const Game = {
   },
 
   generateClouds() {
-    if (this.framesCounter % 250 === 0) {
+    if (this.framesCounter % 150 === 0) {
+      this.clouds.push(new Cloud(this.ctx, this.width));
+    } else if (this.framesCounter === 1) {
       this.clouds.push(new Cloud(this.ctx, this.width));
     }
   },
@@ -118,16 +116,16 @@ const Game = {
   isCollision() {
     return this.obstacles.some((obs) => {
       return (
-        this.player.posX + this.player.width >= obs.posX &&
-        this.player.posY + this.player.height >= obs.posY &&
-        this.player.posX <= obs.posX + obs.width
+        this.player.posX + this.player.width - 30 >= obs.posX &&
+        this.player.posY + this.player.height - 40 >= obs.posY &&
+        this.player.posX <= obs.posX + obs.width - 40
       );
     });
   },
 
   gameOver() {
-    cancelAnimationFrame(this.interval);
     this.gameRunning = false;
+    cancelAnimationFrame(this.interval);
     this.hitSound.play();
     this.ctx.font = "32px P2S";
     this.ctx.fillStyle = "#535353";
