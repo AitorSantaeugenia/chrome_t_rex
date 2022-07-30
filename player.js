@@ -54,6 +54,9 @@ class Player {
 
     //check colision border of the player
     //this.ctx.strokeRect(this.posX, this.posY, this.width, this.height);
+    if (Game.isCollision()) {
+      this.image.src = "./img/trex/dinohit.png";
+    }
 
     this.animate(framesCounter);
 
