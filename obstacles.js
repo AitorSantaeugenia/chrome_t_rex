@@ -38,6 +38,10 @@ class Obstacle {
       this.width,
       this.height
     );
+
+    //check colision image border
+    //this.ctx.strokeRect(this.posX, this.posY, this.width, this.height);
+
     this.move();
   }
 
