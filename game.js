@@ -9,6 +9,7 @@ const Game = {
   player: undefined,
   obstacles: [],
   clouds: [],
+  pteras: [],
 
   //spacekey
   keys: {
@@ -49,8 +50,10 @@ const Game = {
   refreshScreen() {
     this.interval = requestAnimationFrame(() => this.refreshScreen());
 
-    this.isCollision() ? (this.gameRunning = false) : (this.gameRunning = true);
-    this.isCollision() ? this.gameOver() : null;
+    this.isCollision() || this.isCollisionPteras()
+      ? (this.gameRunning = false)
+      : (this.gameRunning = true);
+    this.isCollision() || this.isCollisionPteras() ? this.gameOver() : null;
 
     if (this.gameRunning) {
       this.clear();
@@ -65,6 +68,7 @@ const Game = {
       }
 
       this.generateClouds();
+      this.generatePteras();
     }
   },
 
@@ -79,6 +83,7 @@ const Game = {
     this.player.draw(this.framesCounter);
     this.obstacles.forEach((obs) => obs.draw());
     this.clouds.forEach((obs) => obs.draw());
+    this.pteras.forEach((obs) => obs.draw(this.framesCounter));
     //showing a score
     this.showScore();
   },
@@ -109,8 +114,17 @@ const Game = {
     }
   },
 
+  generatePteras() {
+    if (this.framesCounter >= 1500) {
+      if (this.framesCounter % 500 === 0) {
+        this.pteras.push(new Ptera(this.ctx, this.width, this.height));
+      }
+    }
+  },
+
   clearObstacles() {
     this.obstacles = this.obstacles.filter((obs) => obs.posX >= 0);
+    this.pteras = this.pteras.filter((obs) => obs.posX >= 0);
   },
 
   isCollision() {
@@ -119,6 +133,16 @@ const Game = {
         this.player.posX + this.player.width - 30 >= obs.posX &&
         this.player.posY + this.player.height - 40 >= obs.posY &&
         this.player.posX <= obs.posX + obs.width - 40
+      );
+    });
+  },
+
+  isCollisionPteras() {
+    return this.pteras.some((obs) => {
+      return (
+        this.player.posX + this.player.width - 50 >= obs.posX &&
+        this.player.posY + this.player.height - 20 >= obs.posY + 20 &&
+        this.player.posY - 20 <= obs.posY
       );
     });
   },
@@ -163,5 +187,13 @@ const Game = {
       reachSoundEff.volume = 0.1;
       reachSoundEff.play();
     }
+  },
+
+  checkScore() {
+    return this.score;
+  },
+
+  checkGameRunning() {
+    return this.gameRunning;
   },
 };
