@@ -31,8 +31,7 @@ class Player {
     this.sy = 0;
     this.offSetRight = 33;
     this.offSetUp = 0;
-
-    //checking for colision and ending game
+    this.varOffset = 5;
 
     this.keys = keys;
 
@@ -42,7 +41,7 @@ class Player {
   draw(framesCounter) {
     this.ctx.drawImage(
       this.image,
-      this.image.framesIndex * this.sx - this.offSetRight,
+      this.image.framesIndex * this.sx - this.offSetRight + this.varOffset,
       this.sy,
       this.image.width / this.image.frames,
       this.image.height / 2 + 10,
@@ -51,6 +50,12 @@ class Player {
       this.width,
       this.height
     );
+
+    if (Game.checkTimeZone() === "night") {
+      this.image.src = "./img/nightime/trex/dinowalk.png";
+    } else {
+      this.image.src = "./img/trex/dinowalk.png";
+    }
 
     //check colision border of the player
     //this.ctx.strokeRect(this.posX, this.posY, this.width, this.height);
@@ -124,6 +129,7 @@ class Player {
     this.offSetUp = 50;
     this.velY += 8;
     this.offSetRight = 0;
+    this.varOffset = 0;
   }
 
   defaultRun() {
@@ -131,5 +137,6 @@ class Player {
     this.sy = 0;
     this.offSetRight = 33;
     this.offSetUp = 0;
+    this.varOffset = 5;
   }
 }
