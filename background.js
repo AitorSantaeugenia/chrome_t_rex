@@ -5,7 +5,7 @@ class Background {
     this.height = h;
 
     this.image = new Image();
-    this.image.src = "./img/dino_t_rex_chrome_map.png ";
+    this.image.src = "./img/dino_t_rex_chrome_map.png";
 
     this.posX = 0;
     this.posY = window.innerHeight / 2 + 50;
@@ -15,6 +15,16 @@ class Background {
 
   draw() {
     //console.log(this.height);
+    if (Game.checkTimeZone() === "night") {
+      this.ctx.fillStyle = "black";
+      this.ctx.fillRect(0, 0, this.width, window.innerHeight);
+      this.image.src = "./img/nightime/dino_t_rex_chrome_map.png";
+    } else {
+      this.ctx.fillStyle = "white";
+      this.ctx.fillRect(0, 0, this.width, window.innerHeight);
+      this.image.src = "./img/dino_t_rex_chrome_map.png";
+    }
+
     this.ctx.drawImage(
       this.image,
       this.posX,
