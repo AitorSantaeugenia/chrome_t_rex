@@ -31,6 +31,12 @@ class Obstacle {
   }
 
   draw() {
+    if (Game.checkTimeZone() === "night") {
+      this.image.src = `./img/nightime/cactus/cactus${this.randomImage}.png`;
+    } else {
+      this.image.src = `./img/cactus/cactus${this.randomImage}.png`;
+    }
+
     this.ctx.drawImage(
       this.image,
       this.posX,
