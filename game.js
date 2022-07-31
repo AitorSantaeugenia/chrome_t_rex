@@ -10,6 +10,7 @@ const Game = {
   obstacles: [],
   clouds: [],
   pteras: [],
+  timeZone: "day",
 
   //spacekey
   keys: {
@@ -163,8 +164,13 @@ const Game = {
   },
 
   showScore() {
+    if (this.checkTimeZone() === "night") {
+      this.ctx.fillStyle = "#fff";
+    } else {
+      this.ctx.fillStyle = "#535353";
+    }
+
     this.ctx.font = "35px P2S";
-    this.ctx.fillStyle = "#535353";
 
     //this should be a for, but we'll come later for this
     if (String(this.score).length === 1) {
@@ -193,7 +199,13 @@ const Game = {
     return this.score;
   },
 
-  checkGameRunning() {
-    return this.gameRunning;
+  checkTimeZone() {
+    if (this.score % 1000 === 0 && this.score % 2000 !== 0) {
+      this.timeZone = "night";
+    } else if (this.score % 2000 === 0) {
+      this.timeZone = "day";
+    }
+
+    return this.timeZone;
   },
 };
