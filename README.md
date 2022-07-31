@@ -8,7 +8,7 @@
 
 <div align="center">
 
-# In play game
+# Gameplay
 ![In play game](https://user-images.githubusercontent.com/14861253/173209419-75f23b60-ba4e-40c2-8e24-62e070a06613.gif)
 
 # Midnight time
