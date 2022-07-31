@@ -22,6 +22,12 @@ class Ptera {
   }
 
   draw(framesCounter) {
+    if (Game.checkTimeZone() === "night") {
+      this.image.src = "./img/nightime/trex/ptera.png";
+    } else {
+      this.image.src = `./img/trex/ptera.png`;
+    }
+
     this.ctx.drawImage(
       this.image,
       (this.image.framesIndex * this.image.width) / this.image.frames,
