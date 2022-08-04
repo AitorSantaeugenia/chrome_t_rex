@@ -56,20 +56,22 @@ const Game = {
       : (this.gameRunning = true);
     this.isCollision() || this.isCollisionPteras() ? this.gameOver() : null;
 
-    if (this.gameRunning) {
-      this.clear();
-      this.rewards();
-      this.drawAll();
-      this.clearObstacles();
+    this.clear();
+    this.rewards();
+    this.drawAll();
+    this.clearObstacles();
 
-      this.framesCounter++;
+    this.framesCounter++;
 
-      if (this.framesCounter % 1 === 0) {
-        this.generateObstacles();
-      }
+    if (this.framesCounter % 1 === 0) {
+      this.generateObstacles();
+    }
 
-      this.generateClouds();
-      this.generatePteras();
+    this.generateClouds();
+    this.generatePteras();
+
+    if (this.gameRunning === false) {
+      this.drawGameOver();
     }
   },
 
@@ -81,7 +83,7 @@ const Game = {
 
   drawAll() {
     this.background.draw();
-    this.player.draw(this.framesCounter);
+    this.player.draw(this.framesCounter, this.checkGameOver(this.gameRunning));
     this.obstacles.forEach((obs) => obs.draw());
     this.clouds.forEach((obs) => obs.draw());
     this.pteras.forEach((obs) => obs.draw(this.framesCounter));
@@ -94,7 +96,6 @@ const Game = {
   },
 
   generateObstacles() {
-    //console.log(this.framesCounter);
     if (this.framesCounter % 60 === 0) {
       this.obstacles.push(
         new Obstacle(
@@ -149,9 +150,15 @@ const Game = {
   },
 
   gameOver() {
-    this.gameRunning = false;
-    cancelAnimationFrame(this.interval);
     this.hitSound.play();
+    this.gameRunning = false;
+
+    cancelAnimationFrame(this.interval);
+
+    restartButton.classList.remove("hidden");
+  },
+
+  drawGameOver() {
     this.ctx.font = "32px P2S";
     this.ctx.fillStyle = "#535353";
     this.ctx.fillText(
@@ -159,8 +166,15 @@ const Game = {
       window.innerWidth / 2 - 250,
       window.innerHeight / 2 - 122
     );
+  },
 
-    restartButton.classList.remove("hidden");
+  checkGameOver(gameRunning) {
+    if (!gameRunning) {
+      gameRunning = false;
+    }
+    this.gameRunning = gameRunning;
+
+    return this.gameRunning;
   },
 
   showScore() {
