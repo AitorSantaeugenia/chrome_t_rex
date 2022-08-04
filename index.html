@@ -23,11 +23,28 @@
 
   </style>
 
-  <canvas id="myCanvas" tabindex="1"></canvas>
+  <canvas id="myCanvas" tabindex="1" class="backgroundImage"></canvas>
+  <div id="startbuttonDiv" class="startingButton">
+    <div class="test">
+      <button id="startButton" class="startingText">
+        <h1>Start Game</h1>
+      </button>
+      <h1 class="centerText"><u>Game Controls</u></h1>
+      <div class="ulDivControls">
+        <ul>
+          <li>SPACE: Jump</li>
+          <li>ArrowUp: Run</li>
+          <li>ArrowDown: Crouch run</li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <div id="restartButton" class="hidden">
-    <img src="./img/restart.png" alt="Restart button" class="noDrag">
+    <img src="./img/restart.png" alt="Restart" class="noDrag">
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="./ptera.js"></script>
   <script src="./cloud.js"></script>
   <script src="./obstacles.js"></script>
@@ -35,8 +52,7 @@
   <script src="./background.js"></script>
   <script src="./game.js"></script>
   <script src="./index.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 
 </body>
 
