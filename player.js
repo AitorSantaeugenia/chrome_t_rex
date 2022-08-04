@@ -10,14 +10,17 @@ class Player {
 
     this.image = new Image();
     this.image.src = "./img/trex/dinowalk.png";
-    this.image.frames = 2;
-    this.image.framesIndex = 0;
+
+    // this.imageHit = new Image();
+    // this.imageHit.src = "./img/trex/dinohit.png";
+
+    this.image.frames = 3;
+    this.image.framesIndex = 2;
+
+    this.gameRunning = true;
 
     //Sounds
     this.jumpSound = document.getElementById("jumpSoundEff");
-
-    //know if game is running or not
-    this.gameRunning = true;
 
     this.posX = 50;
     this.posY = this.gameHeight / 2 - 50;
@@ -38,7 +41,13 @@ class Player {
     this.setListeners();
   }
 
-  draw(framesCounter) {
+  draw(framesCounter, gameRunning) {
+    this.gameRunning = gameRunning;
+
+    if (this.gameRunning === false) {
+      this.image.framesIndex = 2;
+    }
+
     this.ctx.drawImage(
       this.image,
       this.image.framesIndex * this.sx - this.offSetRight + this.varOffset,
@@ -57,12 +66,6 @@ class Player {
       this.image.src = "./img/trex/dinowalk.png";
     }
 
-    //check colision border of the player
-    //this.ctx.strokeRect(this.posX, this.posY, this.width, this.height);
-    if (Game.isCollision()) {
-      this.image.src = "./img/trex/dinohit.png";
-    }
-
     this.animate(framesCounter);
 
     this.move();
@@ -72,13 +75,14 @@ class Player {
     if (framesCounter % 5 == 0) {
       this.image.framesIndex++;
     }
-    if (this.image.framesIndex >= this.image.frames) {
+
+    //we don't want to show the third frame (it's when dino hits an obstacle)
+    if (this.image.framesIndex >= 2 && this.gameRunning === true) {
       this.image.framesIndex = 0;
     }
   }
 
   move() {
-    // console.log(this.gameRunning);
     if (this.posY < this.posY0) {
       // Saltando
       this.posY += this.velY;
