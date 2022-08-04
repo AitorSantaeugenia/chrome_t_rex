@@ -203,7 +203,7 @@ const Game = {
   },
 
   rewards() {
-    if (this.score % 500 === 0) {
+    if (this.score % 500 === 0 && this.score >= 400) {
       reachSoundEff.volume = 0.1;
       reachSoundEff.play();
     }
