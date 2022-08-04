@@ -1,5 +1,8 @@
+const restartButton = document.getElementById("restartButton");
+
 window.onload = function () {
-  const restartButton = document.getElementById("restartButton");
+  const canvas = document.querySelector("canvas");
+  canvas.focus();
   Game.init();
 };
 
