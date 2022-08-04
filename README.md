@@ -39,7 +39,9 @@ Any suggesitons, hit me here on github |or| aitorsantaeugenia@gmail.com
 <div align="left">
 
 ## TODO
-- Change hit dino image when colission (we need to work @ when framerequestanimation stops with this)
+- ~~Change hit dino image when colission (we need to work @ when framerequestanimation stops with this)~~
+- Better balance with speed, colisions and flying dinos (Pteras)
+- Solve a bug when window.onload dino is not running until we use arrowUp or arrowDown
 
 </div>
 
