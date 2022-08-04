@@ -11,9 +11,6 @@ class Player {
     this.image = new Image();
     this.image.src = "./img/trex/dinowalk.png";
 
-    // this.imageHit = new Image();
-    // this.imageHit.src = "./img/trex/dinohit.png";
-
     this.image.frames = 3;
     this.image.framesIndex = 2;
 
