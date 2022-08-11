@@ -11,9 +11,16 @@ class Player {
     this.image = new Image();
     this.image.src = "./img/trex/dinowalk.png";
     //we add the image width here, and force it instead of calculate it later, so we solve the 0 bug
+    //also we force this.image.height
     this.image.width = 376;
+    this.image.height = 159;
+
     this.image.frames = 3;
     this.image.framesIndex = 2;
+    //we add this to know the running method
+    this.running = true;
+    this.rcrouch = false;
+    this.runningMethod = "running";
 
     //game property
     this.gameRunning = true;
@@ -43,6 +50,9 @@ class Player {
   }
 
   draw(framesCounter, gameRunning) {
+    //this is to check the hitbox
+    // this.ctx.strokeRect(this.posX, this.posY, this.width, this.height);
+
     this.gameRunning = gameRunning;
 
     if (this.gameRunning === false) {
@@ -73,6 +83,12 @@ class Player {
   }
 
   animate(framesCounter) {
+    if (this.running === true && this.rcrouch === false) {
+      this.runningMethod = "running";
+    } else if (this.rcrouch === true && this.running === false) {
+      this.runningMethod = "crouch";
+    }
+
     if (framesCounter % 5 == 0) {
       this.image.framesIndex++;
     }
@@ -117,7 +133,7 @@ class Player {
   }
 
   jump() {
-    this.posY -= 80;
+    this.posY -= 120;
     this.velY -= 8;
     //we need to work here with the sound bug after game false
     if (this.gameRunning === true) {
@@ -129,6 +145,8 @@ class Player {
   }
 
   crouch() {
+    this.rcrouch = true;
+    this.running = false;
     this.sx = this.image.width / this.image.frames + 5;
     this.sy = this.image.height / 2 + 20;
     this.offSetUp = 50;
@@ -138,10 +156,16 @@ class Player {
   }
 
   defaultRun() {
+    this.running = true;
+    this.rcrouch = false;
     this.sx = this.image.width / this.image.frames;
     this.sy = 0;
     this.offSetRight = 33;
     this.offSetUp = 0;
     this.varOffset = 5;
+  }
+
+  checkRunningMethod() {
+    return this.runningMethod;
   }
 }
