@@ -40,10 +40,12 @@ class Background {
       this.height
     );
 
-    if (Game.checkScore() >= 600) {
+    if (Game.checkScore() >= 600 && Game.checkScore() <= 2500) {
       this.velX = 12;
-    } else if (Game.checkScore() >= 2500) {
+    } else if (Game.checkScore() >= 2500 && Game.checkScore() <= 4000) {
       this.velX = 15;
+    } else if (Game.checkScore() >= 4000) {
+      this.velX = 20;
     }
 
     this.move();
