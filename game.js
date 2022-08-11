@@ -117,8 +117,12 @@ const Game = {
   },
 
   generatePteras() {
-    if (this.framesCounter >= 1500) {
+    if (this.framesCounter >= 1000 && this.framesCounter <= 2500) {
       if (this.framesCounter % 500 === 0) {
+        this.pteras.push(new Ptera(this.ctx, this.width, this.height));
+      }
+    } else if (this.framesCounter >= 2500) {
+      if (this.framesCounter % 250 === 0) {
         this.pteras.push(new Ptera(this.ctx, this.width, this.height));
       }
     }
@@ -140,13 +144,23 @@ const Game = {
   },
 
   isCollisionPteras() {
-    return this.pteras.some((obs) => {
-      return (
-        this.player.posX + this.player.width - 50 >= obs.posX &&
-        this.player.posY + this.player.height - 20 >= obs.posY + 20 &&
-        this.player.posY - 20 <= obs.posY
-      );
-    });
+    if (this.player.checkRunningMethod() === "running") {
+      return this.pteras.some((obs) => {
+        return (
+          this.player.posX + this.player.width - 50 >= obs.posX &&
+          this.player.posY + this.player.height - 20 >= obs.posY + 20 &&
+          this.player.posY - 20 <= obs.posY
+        );
+      });
+    } else if (this.player.checkRunningMethod() === "crouch") {
+      return this.pteras.some((obs) => {
+        return (
+          this.player.posX + this.player.width - 50 >= obs.posX &&
+          this.player.posY + this.player.height - 20 >= obs.posY &&
+          this.player.posY <= obs.posY - 20
+        );
+      });
+    }
   },
 
   gameOver() {
