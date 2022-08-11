@@ -1,28 +1,32 @@
 class Player {
   constructor(ctx, gameW, gameH, keys) {
+    //Canvas properties
     this.ctx = ctx;
-
     this.gameWidth = gameW;
     this.gameHeight = gameH;
 
+    //Player properties
     this.width = 120;
     this.height = 140;
-
     this.image = new Image();
     this.image.src = "./img/trex/dinowalk.png";
-
+    //we add the image width here, and force it instead of calculate it later, so we solve the 0 bug
+    this.image.width = 376;
     this.image.frames = 3;
     this.image.framesIndex = 2;
 
+    //game property
     this.gameRunning = true;
 
     //Sounds
     this.jumpSound = document.getElementById("jumpSoundEff");
 
+    //fixed positions for movement while we using keys
     this.posX = 50;
     this.posY = this.gameHeight / 2 - 50;
     this.posY0 = this.posY;
 
+    //velocity and gravity
     this.velY = 1;
     this.gravity = 0.4;
 
