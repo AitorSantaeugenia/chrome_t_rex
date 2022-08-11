@@ -3,7 +3,7 @@
 - You can acces the real one typing <b><u>chrome://dino</u></b> in chrome as an URL
 - Since <b><u>keypress</u></b> in JavaScript is deprecated, we are using <b><u>ArrowDown</u></b> for crouching and <b><u>ArrowUp</u></b> to run normal again, so we are changing the behaviour of the real game a little bit cos of this.
 - Right now, Pteras (flying dinos) appear when the score is 1000 and gets faster at 2500 (and appears more often).
-- The speed of the game (obstacles and map) gets faster at 600 and 2500.
+- The speed of the game (obstacles and map) gets faster at 600, 2500 & 4000.
 - When the score % 1000 === 0 it's midnight time, when score % 2000 === 0 && score % 1000 !== 0 it's day time. So we change from daylight to midnight every 1000 points.
 
 ## Keyboard
