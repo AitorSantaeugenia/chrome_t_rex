@@ -3,9 +3,8 @@ class Ptera {
     this.ctx = ctx;
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
-    this.randomNumber = Math.trunc(
-      Math.random() * (this.gameHeight / 2 + 85) + 1
-    );
+    //we now generate pteras from when the dino is running, to his max jump posY
+    this.randomNumber = Math.trunc(Math.random() * (340 - 209 + 1) + 209);
 
     this.width = 60;
     this.height = 40;
